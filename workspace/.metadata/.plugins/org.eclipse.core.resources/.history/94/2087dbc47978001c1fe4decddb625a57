@@ -16,7 +16,7 @@ public class CalcPage extends HttpServlet {
 		String exp="0";
 		if(cookies !=null)
 			for(Cookie c: cookies)
-				if(c.getName().equals("exp")) {
+				if(c.getName().equals("op")) {
 					exp=c.getValue();
 					break;
 				}

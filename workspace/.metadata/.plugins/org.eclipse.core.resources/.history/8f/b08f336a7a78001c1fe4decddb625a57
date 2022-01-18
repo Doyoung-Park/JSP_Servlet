@@ -1,8 +1,5 @@
 package com.newlecture.web;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -30,13 +27,7 @@ public class calc3 extends HttpServlet {
 				}
 		
 		if(operator !=null && operator.equals("=")) {
-			ScriptEngine engine=new ScriptEngineManager().getEngineByName("nashorn");
-			try {
-				exp = String.valueOf(engine.eval(exp));
-			} catch (ScriptException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 		else {
 		exp+=(value==null)?"":value;
