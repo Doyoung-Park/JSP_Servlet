@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<form action="calc" method="post">
+		
+		 	<table>
+		 		<tr>
+		 		
+		 			<td></td>
+		 		</tr>
+		 		<tr>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 		</tr>
+		 		<tr>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 		</tr>
+		 		<tr>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 		</tr>
+		 		<tr>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 		</tr>
+		 		<tr>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 			<td><input type="submit" name="operator" value="+"/></td>
+		 		</tr>
+		 	</table>
+		 		<div>
+		 			<input type="submit" name="operator" value="+"/>
+		 			<input type="submit" name="operator" value="-"/>
+		 			<input type="submit" name="operator" value="="/>
+		 		</div>
+		 	
+		 	
+		 </form>
+	</div>
+
+</body>
+</html>
