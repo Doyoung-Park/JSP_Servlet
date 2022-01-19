@@ -9,4 +9,6 @@
     <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="java.util.Vector"/>
+    <fullyQualifiedTypeName name="javax.script.ScriptEngine"/>
+    <fullyQualifiedTypeName name="javax.script.ScriptEngineManager"/>
 </qualifiedTypeNameHistroy>

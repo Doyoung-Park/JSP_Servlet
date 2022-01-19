@@ -38,20 +38,12 @@ public class calc3 extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		else if(operator !=null && operator.equals("C")) {
-		//계산기에서 C버튼을 누르면 캐시가 삭제됨.
-			exp="";
-		}
-		
 		else {
 		exp+=(value==null)?"":value;
 		exp+=(operator==null)?"":operator;
 		exp+=(dot==null)?"":dot;
 		}
 		Cookie expCookie = new Cookie("exp",exp);
-		
-		if(operator !=null && operator.equals("C"))
-			expCookie.setMaxAge(0);
 		
 		response.addCookie(expCookie);
 		
