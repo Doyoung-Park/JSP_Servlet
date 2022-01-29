@@ -1,0 +1,9 @@
+package com.newlecture.web;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet("/spag")
+public class Spag extends HttpServlet{
+	doGet()
+}

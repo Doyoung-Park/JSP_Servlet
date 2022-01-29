@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+
+<!-- 입력코드 -->
+<!-- ------------------------------------ -->
+<!-- 출력코드 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+	
+	<!--  <%=request.getAttribute("result") %>입니다. -->
+	${result} 입니다.
+	${names[1]} 입니다. 
+</body>
+</html>

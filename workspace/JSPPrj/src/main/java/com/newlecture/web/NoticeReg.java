@@ -1,9 +1,11 @@
 package com.newlecture.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.*;
 
 @WebServlet("/notice-reg")		// <-- 이렇게 하면 이 URL 주소를 책임지는 서블릿주소가 됨
 public class NoticeReg extends HttpServlet{
