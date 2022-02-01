@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.newlecture.web.entity.Notice;
+
 @WebServlet("/notice/detail")
 public class NoticeDetailController extends HttpServlet{
 	@Override
@@ -39,15 +41,21 @@ public class NoticeDetailController extends HttpServlet{
 			 String hit= rs.getString("HIT");
 			 String files= rs.getString("FILES");
 			 String content=rs.getString("CONTENT");
-			 
+			/* 
 			request.setAttribute("", title);
 			request.setAttribute("",writerID);
 			request.setAttribute("", regdate);
 			request.setAttribute("", hit);
 			request.setAttribute("", files);
 			request.setAttribute("", content);
-				
-				 
+			*/	
+
+			 Notice notice = new Notice(
+					 id, title, writerID, regdate, hit, files, content 
+					 );
+			 
+			 request.setAttribute("n", notice);
+			 
 			rs.close();
 				st.close();
 				con.close();
@@ -69,9 +77,9 @@ public class NoticeDetailController extends HttpServlet{
 		// forward: 이 페이지에서 작업하던 내용을 저 페이지에서 이어받아서 작업하는 방식
 		
 		
-		
+		// forward
 		request
-		.getRequestDispatcher("/notice/detail.jsp")
+		.getRequestDispatcher("/WEB-INF/view/notice/detail.jsp")
 		.forward(request, response);
 	}
 }
