@@ -8,6 +8,7 @@
 <%@page import="java.sql.PreparedStatement" %>
 <%@page import="java.util.Date" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -162,7 +163,7 @@
 								</tr>
 								<tr>
 									<th>작성일</th>
-									<td class="text-align-left text-indent" colspan="3"> ${n.regdate}</td>
+									<td class="text-align-left text-indent" colspan="3"> <fmt:formatDate value="${n.regdate}" pattern="yyyy년 MM월 dd일 hh:mm:ss"/></td>
 								</tr>
 								<tr>
 									<th>작성자</th>
