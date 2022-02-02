@@ -27,7 +27,7 @@ public class NoticeListController extends HttpServlet{
 		List<Notice> list= new ArrayList<>();
 		
 		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
-		String sql = "SELECT * FROM NOTICE";
+		String sql = "SELECT * FROM NOTICE"; 
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
