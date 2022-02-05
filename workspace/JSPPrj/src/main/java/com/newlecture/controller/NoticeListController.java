@@ -17,53 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.newlecture.web.entity.Notice;
+import com.newlecture.web.service.NoticeService;
 
 @WebServlet("/notice/list")
 public class NoticeListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		NoticeService service= new NoticeService();
 		
-		List<Notice> list= new ArrayList<>();
+		List<Notice> list= service.getNoticeList();
 		
-		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
-		String sql = "SELECT * FROM NOTICE"; 
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
-			Connection con= DriverManager.getConnection(url,"NEWLEC","12345");
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-
-			while(rs.next()){ 
-				 int id=rs.getInt("ID");
-				 String title= rs.getString("TITLE");
-				 String writerID = rs.getString("WRITER_ID");
-				 Date regdate= rs.getDate("REGDATE");
-				 String hit= rs.getString("HIT");
-				 String files= rs.getString("FILES");
-				 String content=rs.getString("CONTENT");
-
-				 Notice notice = new Notice(
-						 id, title, writerID, regdate, hit, files, content 
-						 );
-				 
-				 list.add(notice);
-			}
-
-
-
-			rs.close();
-			st.close();
-			con.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		request.setAttribute("list", list);
 		
