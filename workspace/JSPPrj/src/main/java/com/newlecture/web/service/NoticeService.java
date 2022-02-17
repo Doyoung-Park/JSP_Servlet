@@ -111,7 +111,8 @@ public class NoticeService {
 			
 			ResultSet rs = st.executeQuery();
 
-			count = rs.getInt("count");
+			if(rs.next())
+				count = rs.getInt("count");
 
 			rs.close();
 			st.close();
