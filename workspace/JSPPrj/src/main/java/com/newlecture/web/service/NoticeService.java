@@ -31,7 +31,7 @@ public class NoticeService {
 		
 		List<Notice> list= new ArrayList<>();
 		
-		String sql="SELECT * FROM ( "
+		String sql="SELECT * FROM ( "																		//*********************************
 				+ "    SELECT ROWNUM NUM, N.*  "
 				+ "    FROM (SELECT * FROM NOTICE WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N "
 				+ ") "
@@ -97,7 +97,7 @@ public class NoticeService {
 		
 		String sql="SELECT COUNT(ID) COUNT FROM ( "
 				+ "    SELECT ROWNUM NUM, N.*  "
-				+ "    FROM (SELECT * FROM NOTICE WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N "
+				+ "    FROM (SELECT * FROM NOTICE WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N " 			//********************************************
 				+ ")";
 		
 		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
