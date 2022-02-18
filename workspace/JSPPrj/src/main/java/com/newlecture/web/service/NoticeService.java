@@ -11,14 +11,15 @@ import java.util.Date;
 import java.util.List;
 
 import com.newlecture.web.entity.Notice;
+import com.newlecture.web.entity.NoticeView;
 
 public class NoticeService {
-	public List<Notice> getNoticeList() {
+	public List<NoticeView> getNoticeList() {
 		
 		return getNoticeList("title","",1);
 	}
 	
-	public List<Notice> getNoticeList(int page) {
+	public List<NoticeView> getNoticeList(int page) {
 		
 		return getNoticeList("title","",page);
 	}
@@ -27,13 +28,13 @@ public class NoticeService {
 	// 검색창에서 검색 기능 함수
 	// field -> 'title' (제목) or 'writer_id' (작성자 아이디)
 	// query -> 검색창에 입력한 검색어 => 이 검색어를 포함하는 값을 찾아야 함
-	public List<Notice> getNoticeList(String field, String query, int page) {
+	public List<NoticeView> getNoticeList(String field, String query, int page) {
 		
-		List<Notice> list= new ArrayList<>();
+		List<NoticeView> list= new ArrayList<>();
 		
 		String sql="SELECT * FROM ( "																		//*********************************
 				+ "    SELECT ROWNUM NUM, N.*  "
-				+ "    FROM (SELECT * FROM NOTICE WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N "
+				+ "    FROM (SELECT * FROM NOTICE_VIEW WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N "
 				+ ") "
 				+ " WHERE NUM BETWEEN ? AND ?";
 		
@@ -61,10 +62,19 @@ public class NoticeService {
 				 Date regdate= rs.getDate("REGDATE");
 				 String hit= rs.getString("HIT");
 				 String files= rs.getString("FILES");
-				 String content=rs.getString("CONTENT");
+				 
+//				 String content=rs.getString("CONTENT");
+				 int cmtCount = rs.getInt("CMT_COUNT");
 
-				 Notice notice = new Notice(
-						 id, title, writerID, regdate, hit, files, content 
+				 
+				 NoticeView notice = new NoticeView(
+						 id, 
+						 title, 
+						 writerID, 
+						 regdate, 
+						 hit, 
+						 files, 
+						 cmtCount 
 						 );
 				 
 				 list.add(notice);
@@ -227,7 +237,7 @@ public class NoticeService {
 		
 		return notice;
 	}
-	
+
 	public Notice getPrevNotice(int id) {
 		
 		Notice notice =null;
@@ -238,11 +248,11 @@ public class NoticeService {
 				+ " AND ROWNUM = 1";
 		
 
-		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
+		String url="jdbc:mysql://localhost:3306/newlecture";
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con= DriverManager.getConnection(url,"NEWLEC","12345");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con= DriverManager.getConnection(url,"doyoung","Tlswm7923!@");
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1,id); 	// 위에서의 1번째 물음표에 두 번째 인자로 전달된 값을 사용하겠다는 뜻
 			
