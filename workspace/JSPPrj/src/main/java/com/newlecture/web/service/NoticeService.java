@@ -14,7 +14,32 @@ import com.newlecture.web.entity.Notice;
 import com.newlecture.web.entity.NoticeView;
 
 public class NoticeService {
-	public List<NoticeView> getNoticeList() {
+	public int removeNoticeAll(int[] ids) {	// 일괄 삭제
+		// 배열로 id를 받
+		return 0;	// 몇 개가 삭제되었는지를 반환. 
+	}
+	public int pubNoticeAll(int[] ids){ // 일괄 공개
+	
+		return 0;	// 몇 개를 공개했는지 반환 
+	}
+	public int insertNotice(Notice notice) { // 공지사항 추가
+		
+		return 0;	// 정상적으로 추가되면 1 그렇지 않으면 0 반환
+	}
+	public int deleteNotice(int id) {	//
+
+		return 0;
+	}
+	public int updateNotice(Notice notice) {	//새로 반영된 레코드가 몇 개의 레코드에 영향을 주었는지 리턴
+	
+		return 0;
+	}
+	public List<Notice> getNoticeNewestList(){  	// 새로운 공지사항을 리
+	
+		return null;
+	}
+	
+	public List<NoticeView> getNoticeList() {		//	(기존에 사용한) 공지사항 리턴
 		
 		return getNoticeList("title","",1);
 	}
