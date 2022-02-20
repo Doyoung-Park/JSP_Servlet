@@ -20,7 +20,7 @@ import com.newlecture.web.entity.Notice;
 import com.newlecture.web.entity.NoticeView;
 import com.newlecture.web.service.NoticeService;
 
-@WebServlet("/admin/notice/list")
+@WebServlet("/admin/board/notice/list")
 public class ListController extends HttpServlet{
 	
 	@Override
@@ -28,12 +28,23 @@ public class ListController extends HttpServlet{
 		String[] openIds = request.getParameterValues("open-id");
 		String[] delIds = request.getParameterValues("del-id");
 		
-		for(String openId : openIds) 
-			System.out.printf("open id : %s\n",openId);
+		String cmd=request.getParameter("cmd");
+		switch(cmd) {
+		case "일괄공개":
+			for(String openId : openIds) 
+				System.out.printf("open id : %s\n",openId);
+			break;
+		case "일괄삭제":
+			NoticeService service = new NoticeService();
+			int[] ids=new int[delIds.length];
+			for(int i=0; i<delIds.length; i++)
+				ids[i]=Integer.parseInt(delIds[i]);
 			
-		for(String delId : delIds) 
-			System.out.printf("del id : %s\n",delId);
-			
+			int result = service.deleteNoticeAll(ids);
+			break;
+		}
+		
+		response.sendRedirect("list");
 		
 	}
 	

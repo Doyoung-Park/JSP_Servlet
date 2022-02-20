@@ -24,7 +24,39 @@ public class NoticeService {
 	}
 	public int insertNotice(Notice notice) { // 공지사항 추가
 		
-		return 0;	// 정상적으로 추가되면 1 그렇지 않으면 0 반환
+		int result=0;
+		
+		String params= "";
+		
+		String sql="INSERT INTO NOTICE(TITLE, CONTENT, WRITER_ID, PUB) VALUES(?,?,?,?)";
+		
+
+		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url,"NEWLEC","12345");
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1, notice.getTitle());
+			st.setString(2,  notice.getContent());
+			st.setString(3,  notice.getWriterID());
+			st.setBoolean(4,  notice.getPub());
+			
+			
+			result = st.executeUpdate();
+			
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;	// 정상적으로 추가되면 1 그렇지 않으면 0 반환
 	}
 	public int deleteNotice(int id) {	//
 
@@ -39,7 +71,7 @@ public class NoticeService {
 		return null;
 	}
 	
-	public List<NoticeView> getNoticeList() {		//	(기존에 사용한) 공지사항 리턴
+	public List<NoticeView> getNoticeList() {		//	(기존에 사용한) 공지사항 리
 		
 		return getNoticeList("title","",1);
 	}
@@ -90,7 +122,7 @@ public class NoticeService {
 				 
 //				 String content=rs.getString("CONTENT");
 				 int cmtCount = rs.getInt("CMT_COUNT");
-
+				 boolean pub = rs.getBoolean("PUB");
 				 
 				 NoticeView notice = new NoticeView(
 						 id, 
@@ -99,6 +131,7 @@ public class NoticeService {
 						 regdate, 
 						 hit, 
 						 files, 
+						 pub,
 						 cmtCount 
 						 );
 				 
@@ -190,9 +223,10 @@ public class NoticeService {
 				 String hit= rs.getString("HIT");
 				 String files= rs.getString("FILES");
 				 String content=rs.getString("CONTENT");
+				 boolean pub = rs.getBoolean("PUB");
 
 				 notice = new Notice(
-						 nid, title, writerID, regdate, hit, files, content 
+						 nid, title, writerID, regdate, hit, files, content, pub
 						 );
 			}
 
@@ -242,11 +276,13 @@ public class NoticeService {
 				 String hit= rs.getString("HIT");
 				 String files= rs.getString("FILES");
 				 String content=rs.getString("CONTENT");
+				 boolean pub = rs.getBoolean("PUB");
 
 				 notice = new Notice(
-						 nid, title, writerID, regdate, hit, files, content 
+						 nid, title, writerID, regdate, hit, files, content, pub
 						 );
 			}
+
 
 			rs.close();
 			st.close();
@@ -273,11 +309,11 @@ public class NoticeService {
 				+ " AND ROWNUM = 1";
 		
 
-		String url="jdbc:mysql://localhost:3306/newlecture";
+		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con= DriverManager.getConnection(url,"doyoung","Tlswm7923!@");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url,"NEWLEC","12345");
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1,id); 	// 위에서의 1번째 물음표에 두 번째 인자로 전달된 값을 사용하겠다는 뜻
 			
@@ -292,11 +328,13 @@ public class NoticeService {
 				 String hit= rs.getString("HIT");
 				 String files= rs.getString("FILES");
 				 String content=rs.getString("CONTENT");
+				 boolean pub = rs.getBoolean("PUB");
 
 				 notice = new Notice(
-						 nid, title, writerID, regdate, hit, files, content 
+						 nid, title, writerID, regdate, hit, files, content, pub
 						 );
 			}
+
 
 			rs.close();
 			st.close();
@@ -311,6 +349,45 @@ public class NoticeService {
 
 		
 		return notice;
+	}
+	public int deleteNoticeAll(int[] ids) {
+		
+		int result=0;
+		
+		String params= "";
+		
+		for(int i=0; i<ids.length; i++) {
+			params +=ids[i];
+			
+			if( i<ids.length-1)		// 마지막이 되기 전까지 ',' 를 붙여줌 
+				params += ",";
+		}
+		String sql="DELETE NOTICE WHERE ID IN ("+params+")";
+		
+
+		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url,"NEWLEC","12345");
+			Statement st = con.createStatement();
+		
+			
+			
+			result = st.executeUpdate(sql);
+			
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
+		
 	}
 	
 }
