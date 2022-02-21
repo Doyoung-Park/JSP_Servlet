@@ -179,8 +179,8 @@
 									<c:if test="${fn:endsWith(fileName, '.zip') }">				
 										<c:set var="style" value="font-weight: bold; color:red"/>
 									</c:if>
-									
-									<a href="${fileName}" style="${style}">  ${fn:toUpperCase(fileName) } </a>
+											<!--  올려진 폴더에서 클릭한 파일을 보여주도록 href 를 설정함 -->
+									<a download href="/upload/${fileName}" style="${style}" >  ${fn:toUpperCase(fileName) } </a>
 									<c:if test="${!st.last}">
 									/
 									</c:if>

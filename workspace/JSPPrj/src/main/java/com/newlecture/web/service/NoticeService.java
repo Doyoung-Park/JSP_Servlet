@@ -28,7 +28,7 @@ public class NoticeService {
 		
 		String params= "";
 		
-		String sql="INSERT INTO NOTICE(TITLE, CONTENT, WRITER_ID, PUB) VALUES(?,?,?,?)";
+		String sql="INSERT INTO NOTICE(TITLE, CONTENT, WRITER_ID, PUB, FILES) VALUES(?,?,?,?,?)";
 		
 
 		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
@@ -42,7 +42,7 @@ public class NoticeService {
 			st.setString(2,  notice.getContent());
 			st.setString(3,  notice.getWriterID());
 			st.setBoolean(4,  notice.getPub());
-			
+			st.setString(5, notice.getFiles());
 			
 			result = st.executeUpdate();
 			
