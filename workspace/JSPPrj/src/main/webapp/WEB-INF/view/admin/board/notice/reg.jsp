@@ -159,6 +159,11 @@
                                         <input type="text" name="title" />
                                     </td>
                                 </tr>
+                                <tr>		<!--  다중 파일 업로드를 위해 파일 업로드 란을 두개 만 -->
+                                    <th>첨부파일</th>
+                                    <td colspan="3" class="text-align-left text-indent"><input type="file"
+                                            name="file" /> </td>
+                                </tr>
                                 <tr>
                                     <th>첨부파일</th>
                                     <td colspan="3" class="text-align-left text-indent"><input type="file"
