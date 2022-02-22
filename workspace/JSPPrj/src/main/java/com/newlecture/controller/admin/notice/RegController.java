@@ -51,6 +51,8 @@ public class RegController extends HttpServlet{
 		for(Part p: parts) {
 			if(!p.getName().equals("file")) continue;	// p의 이름이 file이 아니면 pass
 			
+			if(p.getSize() == 0) continue;		// 받은 파일의 크기가 0일 경우, 즉 데이터가 없는 경우
+			
 			Part filePart = p;	
 			
 			String fileName = filePart.getSubmittedFileName();
