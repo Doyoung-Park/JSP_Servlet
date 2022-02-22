@@ -192,10 +192,8 @@
 			%>		 --%>
 			
 			<c:forEach var="n" items="${list}">
-			 
 					<tr>
 						<!-- <td> ${i+1 } </td>  -->
-					
 						<td> ${n.id }</td>
 						<td class="title indent text-align-left"><a href="detail?id=${n.id }">  ${n.title}</a> <span class="text-red">[${n.cmtCount}]</span></td>
 						<td>${n.writerID}</td>

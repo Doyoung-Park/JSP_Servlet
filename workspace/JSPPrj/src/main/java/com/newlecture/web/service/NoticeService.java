@@ -154,6 +154,74 @@ public class NoticeService {
 		return list; 
 	}
 	
+	public List<NoticeView> getNoticePubList(String field, String query, int page) {
+		List<NoticeView> list= new ArrayList<>();
+		
+		String sql="SELECT * FROM ( "																		//*********************************
+				+ "    SELECT ROWNUM NUM, N.*  "
+				+ "    FROM (SELECT * FROM NOTICE_VIEW WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N "
+				+ ") "
+				+ " WHERE PUB=1 AND NUM BETWEEN ? AND ?";
+		
+		// 1, 11, 21, 31 -> 공식: an = 1+(page-1)*10
+		// 10, 20, 30, 40 -> page * 10
+		
+		
+		String url="jdbc:oracle:thin:@192.168.0.164:1521/xepdb1";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url,"NEWLEC","12345");
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1,  "%"+query+"%"); 	// 위에서의 1번째 물음표에 두 번째 인자로 전달된 값을 사용하겠다는 뜻
+			st.setInt(2, 1+(page-1)*10);		// 위에서의 2번째 물음표(?)에 두 번째 인자로 전달된 값을 사용하겠다는 뜻
+			st.setInt(3, page*10);		// 위에서의 3번째 ? 에 두 번째 인자로 전달된 값을 사용하겠다는 뜻
+			
+			
+			ResultSet rs = st.executeQuery();
+
+			while(rs.next()){ 
+				 int id=rs.getInt("ID");
+				 String title= rs.getString("TITLE");
+				 String writerID = rs.getString("WRITER_ID");
+				 Date regdate= rs.getDate("REGDATE");
+				 String hit= rs.getString("HIT");
+				 String files= rs.getString("FILES");
+				 
+//				 String content=rs.getString("CONTENT");
+				 int cmtCount = rs.getInt("CMT_COUNT");
+				 boolean pub = rs.getBoolean("PUB");
+				 
+				 NoticeView notice = new NoticeView(
+						 id, 
+						 title, 
+						 writerID, 
+						 regdate, 
+						 hit, 
+						 files, 
+						 pub,
+						 cmtCount 
+						 );
+				 
+				 list.add(notice);
+			}
+
+
+
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list; 
+	}
+	
 	public int getNoticeCount() {
 		
 		return getNoticeCount("title","");
@@ -389,5 +457,6 @@ public class NoticeService {
 		return result;
 		
 	}
+	
 	
 }
