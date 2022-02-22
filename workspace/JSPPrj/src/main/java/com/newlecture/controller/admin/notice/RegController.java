@@ -65,6 +65,10 @@ public class RegController extends HttpServlet{
 			String realPath = request.getServletContext().getRealPath("/upload");	// 저장 위치의 절대 경로를 이 코드를 통해 쉽게 알아낼 수 있음
 			System.out.println(realPath);	
 			
+			File path = new File(realPath);		// 클라이언트가 보낸 파일을 저장할 폴더의 경로 저장
+			if(!path.exists());		// 만약 이 경로에 클라이언트가 보낸 파일을 저장할 폴더가 존재하지 않는다면,
+				path.mkdirs();		// 해당 경로에 폴더 만들어줌
+			
 		//	fis.read();		// 1바이트씩 읽어들임. 다 읽어들인 후에는 -1을 리턴
 			
 			String filePath = realPath + File.separator + fileName;
